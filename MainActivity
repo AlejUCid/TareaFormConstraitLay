@@ -1,0 +1,138 @@
+MainActivity.kt
+ package com.example.formconstraitlay
+
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.content_main)
+
+        // datos ingresados
+        val nombIngres: EditText = findViewById(R.id.nombre)
+        val edadIngres: EditText = findViewById(R.id.edad)
+        val enviarDatos: Button = findViewById(R.id.BotonEnviar)
+
+        // mostrar datos en la misma activity
+        val mostedad: TextView = findViewById(R.id.MostrarEdad)
+        val mostnom: TextView = findViewById(R.id.MostrarNombre)
+
+        enviarDatos.setOnClickListener {
+            val nom = nombIngres.text.toString()
+            val eda = edadIngres.text.toString()
+
+            mostnom.text = "Hola, $nom"
+            mostedad.text = "Tienes $eda años de edad"
+
+            nombIngres.visibility = View.GONE
+            edadIngres.visibility = View.GONE
+            enviarDatos.visibility = View.GONE
+
+            mostnom.visibility = View.VISIBLE
+            mostedad.visibility = View.VISIBLE
+        }
+    }
+}
+
+content_main.xml Este es mi layout.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <TextView
+        android:id="@+id/encabezado"
+        android:textColor="@color/white"
+        android:text="Formulario"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_width="wrap_content" />
+
+    <EditText
+        android:id="@+id/nombre"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="@string/HintNombre"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/edad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/encabezado"
+        app:layout_constraintTop_toTopOf="80dp" />
+
+    <EditText
+        android:id="@+id/edad"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="@string/HintEdad"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/BotonEnviar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombre"
+        app:layout_constraintTop_toTopOf="80dp" />
+
+
+    <Button
+        android:id="@+id/BotonEnviar"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Enviar"
+        android:textSize="40dp"
+        android:background="@color/black"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="@+id/encabezado" />
+
+    <!--datos ingresados -->
+    <TextView
+        android:id="@+id/MostrarNombre"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/edad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/MostrarEdad"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/BotonEnviar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MostrarNombre"
+        app:layout_constraintVertical_bias="0.6"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+y este es mi string.xml
+
+<resources>
+    <string name="app_name">Formulario</string>
+    <string name="titulo">Formulario</string>
+    <string name="HintNombre">Escribe tu nombre completo</string>
+    <string name="HintEdad">Ingresa tu edad</string>
+    <string name="Enviar">Enviar</string>
+</resources>
